@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Donation;
+use App\Models\Program;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -13,7 +16,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.index');
+        $program = Program::where('user_id', '=', Auth::id());
+        $dana_terkumpul = $program->sum('dana_terkumpul');
+        $total = $program->count();
+        $prg_berhasil = $program->where('status', '=', 'SELESAI')->count();
+        $prg_gagal = $program->where('status', '=', 'TUNDA')->count();
+
+        $donation = Donation::with('program')->whereRelation('program', 'user_id', Auth::id())->latest()->get();
+        return view('pages.admin.index', compact('dana_terkumpul', 'total', 'prg_berhasil', 'prg_gagal', 'prg_gagal', 'donation'));
     }
 
     /**

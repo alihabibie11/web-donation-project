@@ -105,6 +105,30 @@
                                 </td>
                             </tr>
                         </table>
+                        <h4>Riwayat Donasi</h4>
+                        <table class="table">
+                            <tr>
+                                <th>Nama Program</th>
+                                <th>Jenis</th>
+                                <th>Jumlah Donasi</th>
+                                <th>Waktu</th>
+                                <th>Info</th>
+                            </tr>
+                            @forelse ($donated as $dt)
+                            <tr>
+                                <td>{{ $dt->program->title }}</td>
+                                <td>{{ $dt->program->jenis }}</td>
+                                <td>{{ number_format($dt->jumlah) }}</td>
+                                <td>{{ $dt->created_at->diffForHumans() }}</td>
+                                <td><a href="{{ route('program.show', $dt->program_id) }}"
+                                        class="btn btn-sm btn-primary">Detail</a></td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="4">Tidak ada riwayat donasi</td>
+                            </tr>
+                            @endforelse
+                        </table>
                     </div>
                 </div>
             </div>

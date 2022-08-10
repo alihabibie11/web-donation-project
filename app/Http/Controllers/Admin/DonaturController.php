@@ -63,8 +63,9 @@ class DonaturController extends Controller
     {
         $item = User::findOrFail($id);
         $res = json_decode($item->sosmed);
-        // dd($item);
-        return view('pages.admin.detail_donatur', compact('item', 'res'));
+        $donated = Donation::with('program')->where('user_id', '=', $id)->latest()->get();
+        // dd($donated);
+        return view('pages.admin.detail_donatur', compact('item', 'res', 'donated'));
     }
 
     /**
