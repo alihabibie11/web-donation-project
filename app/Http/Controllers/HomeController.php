@@ -64,8 +64,24 @@ class HomeController extends Controller
     {
         $user = auth()->check();
         $nav = true;
-        $program = Program::where('status', '!=', 'SELESAI')->get();
-        $program_done = Program::where('status', '=', 'SELESAI')->get();
+        if (isset($_GET['search_program']) && $_GET['search_program'] != '') {
+            $program = Program::where('status', '!=', 'SELESAI');
+            $program_done = Program::where('status', '=', 'SELESAI');
+            $program = $program->where('title', 'like', '%' . $_GET['search_program'] . '%');
+            $program_done = $program_done->where('title', 'like', '%' . $_GET['search_program'] . '%');
+            if (isset($_GET['category']) && $_GET['category'] != 'all') {
+                $category = $_GET['category'];
+                $program = $program->where('jenis', '=', $category);
+                $program_done = $program_done->where('jenis', '=', $category);
+            }
+            $program = $program->get();
+            $program_done = $program_done->get();
+            return view('pages.list_program', compact('user', 'nav', 'program', 'program_done'));
+        }
+        $program = Program::where('status', '!=', 'SELESAI');
+        $program_done = Program::where('status', '=', 'SELESAI');
+        $program = $program->get();
+        $program_done = $program_done->get();
         return view('pages.list_program', compact('user', 'nav', 'program', 'program_done'));
     }
 

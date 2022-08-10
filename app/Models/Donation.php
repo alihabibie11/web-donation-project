@@ -19,6 +19,7 @@ class Donation extends Model
     public function donatur()
     {
         // return $this->hasOne(User::class, 'id');
+        // email masalah unique
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

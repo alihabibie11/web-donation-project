@@ -92,6 +92,7 @@
                                 <td>Sosmed</td>
                                 <td>:</td>
                                 <td>
+                                    @if (!empty($res))
                                     <img src="{{ asset('assets/images/icon/fb.png') }}" class="mb-1" alt=""> : {{
                                     $res->facebook }}
                                     <br>
@@ -100,6 +101,7 @@
                                     <br>
                                     <img src="{{ asset('assets/images/icon/tw.png') }}" class="mb-1" alt=""> : {{
                                     $res->twitter }}
+                                    @endif
                                 </td>
                             </tr>
                         </table>

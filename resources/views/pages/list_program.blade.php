@@ -10,13 +10,42 @@
         <h2 class="">List Program Donasi</h2>
         <p>Program donasi yang masih berjalan</p>
         <hr>
-        <div class="row">
-            <div class="col-lg-6">
-                <button id="ongoing_btn" class="btn btn-primary mb-3 btn_left" type="button">Masih Berjalan</button>
+        <div class="row g-3 align-items-center">
+            <div class="col-lg-7">
+                <label for="" style="float: left !important;">Cari Program</label>
+                <form action="#" method="GET">
+                    <input type="text" placeholder="Cari Program..." name="search_program"
+                        value="{{ isset($_GET['search_program']) && $_GET['search_program'] != '' ? $_GET['search_program'] : '' }}"
+                        id="search_program" class="form-control">
             </div>
-            <div class="col-lg-6">
-                <button id="finished_btn" class="btn btn-success btn_right" type="button">Sudah Selesai</button>
+            <div class="col-lg-3">
+                <label for="" style="float: left !important;">Kategori</label>
+                <select name="category" class="form-control">
+                    <option value="all">Semua</option>
+                    <option value="zakat" {{ isset($_GET['category']) && $_GET['category']=='zakat' ? 'selected' : ''
+                        }}>Zakat</option>
+                    <option value="infaq" {{ isset($_GET['category']) && $_GET['category']=='infaq' ? 'selected' : ''
+                        }}>Infaq</option>
+                    <option value="sedekah" {{ isset($_GET['category']) && $_GET['category']=='sedekah' ? 'selected'
+                        : '' }}>Sedekah</option>
+                    <option value="umum" {{ isset($_GET['umum']) && $_GET['umum']=='umum' ? 'selected' : '' }}>
+                        Umum</option>
+                </select>
             </div>
+            <div class="col-lg-2">
+                <button type="submit" class="btn btn-success mt-4" style="width: 100%"><i class="fa fa-search"
+                        aria-hidden="true"></i>
+                    Cari</button>
+            </div>
+        </div>
+        </form>
+    </div>
+    <div class="row mt-2">
+        <div class="col-lg-3">
+            <button id="ongoing_btn" class="btn btn-primary mb-3 btn_left" type="button">Masih Berjalan</button>
+        </div>
+        <div class="col-lg-3">
+            <button id="finished_btn" class="btn btn-success btn_right" type="button">Sudah Selesai</button>
         </div>
     </div>
     <div id="ongoing_donation" class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 g-4 mt-4">
@@ -66,6 +95,7 @@
         @endforelse
     </div>
 
+</div>
 </div>
 </div>
 </section>

@@ -26,6 +26,7 @@ class DonaturController extends Controller
             ->join('donations', 'users.id', '=', 'donations.user_id')
             ->select('users.*', 'programs.title', 'donations.jumlah')
             ->where('programs.user_id', '=', Auth::user()->id)
+            ->groupBy('users.id')
             ->get();
         // dd($users);
         return view('pages.admin.donatur', ['data' => $users]);
@@ -62,7 +63,7 @@ class DonaturController extends Controller
     {
         $item = User::findOrFail($id);
         $res = json_decode($item->sosmed);
-        // dd($user);
+        // dd($item);
         return view('pages.admin.detail_donatur', compact('item', 'res'));
     }
 
