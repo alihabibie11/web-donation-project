@@ -16,7 +16,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $data = Program::all();
+        $data = Program::where('user_id', '=', Auth::id())->get();
         return view('pages.admin.program', compact('data'));
     }
 

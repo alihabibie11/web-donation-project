@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DonaturController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,7 +40,7 @@ Route::post('/register_admin', [RegisterController::class, 'create_admin'])->nam
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // admin middleware belum di set
-Route::name('admin.')->group(function () {
+Route::name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('home');
     Route::resource('/admin/program', ProgramController::class);
     Route::post('/admin/donasi', [DonationController::class, 'change_status'])->name('donasi.change_status');
@@ -49,4 +50,13 @@ Route::name('admin.')->group(function () {
     Route::get('/admin/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/admin/profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/admin/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+// user dashboard
+Route::name('user.')->group(function () {
+    Route::prefix('user')->group(function () {
+        Route::resource('/', UserController::class);
+        Route::get('/riwayat_donasi', [UserController::class, 'donation_history'])->name('riwayat_donasi');
+        Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    });
 });
