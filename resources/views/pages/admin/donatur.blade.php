@@ -15,6 +15,10 @@
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
                 DataTable Example
+                <div class="float-end">
+                    <a href="{{ route('admin.report', 'donatur') }}" class="btn btn-danger"><i
+                            class="fa-solid fa-file-pdf"></i> Export PDF</a>
+                </div>
             </div>
             <div class="card-body">
                 <table class="table">

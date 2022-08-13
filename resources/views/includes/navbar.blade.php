@@ -57,10 +57,8 @@
                 <a class="nav-link" href="{{ route('cek_donasi') }}">Cek Donasi</a>
             </li>
             @auth
-            @php $role = Illuminate\Support\Facades\Auth::user()->roles; @endphp
             <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
-                <a class="nav-link"
-                    href="{{ $role == 'ADMIN' ? route('admin.home') : route('cek_donasi') }}">Dashboard</a>
+                <a class="nav-link" href="{{ route('admin.home') }}">Dashboard</a>
             </li>
             @endauth
         </ul>

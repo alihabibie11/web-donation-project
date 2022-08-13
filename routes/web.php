@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DonaturController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,15 +42,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // admin middleware belum di set
 Route::name('admin.')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('home');
-    Route::resource('/admin/program', ProgramController::class);
-    Route::post('/admin/donasi', [DonationController::class, 'change_status'])->name('donasi.change_status');
-    Route::resource('/admin/donasi', DonationController::class);
-    Route::resource('/admin/donatur', DonaturController::class);
-    Route::get('/admin/laporan', [AdminController::class, 'laporan'])->name('laporan');
-    Route::get('/admin/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/admin/profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/admin/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::prefix('admin')->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('home');
+        Route::resource('/program', ProgramController::class);
+        Route::post('/donasi', [DonationController::class, 'change_status'])->name('donasi.change_status');
+        Route::resource('/donasi', DonationController::class);
+        Route::resource('/donatur', DonaturController::class);
+        Route::get('/laporan', [AdminController::class, 'laporan'])->name('laporan');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+        Route::get('/profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
+
+        //report
+        Route::get('/report/{type}', [ReportController::class, 'report'])->name('report');
+    });
 });
 
 // user dashboard
@@ -57,6 +63,6 @@ Route::name('user.')->group(function () {
     Route::prefix('user')->group(function () {
         Route::resource('/', UserController::class);
         Route::get('/riwayat_donasi', [UserController::class, 'donation_history'])->name('riwayat_donasi');
-        Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+        Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
     });
 });

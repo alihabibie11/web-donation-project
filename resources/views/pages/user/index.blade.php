@@ -3,7 +3,11 @@
 @section('title', 'User Dashboard')
 
 @section('content')
-
+<style>
+    .card.cst.mb-4 {
+        min-height: 333px;
+    }
+</style>
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Dashboard</h1>
@@ -25,7 +29,7 @@
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-success text-white mb-4">
                     <div class="card-header">
-                        Total Dana Terkumpul / Berhasil Masuk
+                        Total Donasi
                     </div>
                     <div class="card-body">
                         <div class="text-card float-end">
@@ -35,33 +39,9 @@
                 </div>
             </div>
             <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                    <div class="card-header">
-                        Total Program
-                    </div>
-                    <div class="card-body">
-                        <div class="text-card float-end">
-                            <div class="text-count">{{ '-' }}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-header">
-                        Program Selesai
-                    </div>
-                    <div class="card-body">
-                        <div class="text-card float-end">
-                            <div class="text-count">{{ '-' }}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                    <div class="card-header">
-                        Program Dibatalkan
+                        Jumlah Program
                     </div>
                     <div class="card-body">
                         <div class="text-card float-end">
@@ -71,27 +51,21 @@
                 </div>
             </div>
         </div>
-        <style>
-            .card.cst.mb-4 {
-                min-height: 333px;
-            }
-        </style>
         <div class="row">
             <div class="col-xl-6">
                 <div class="card cst mb-4">
                     <div class="card-header">
                         <i class="fas fa-chart-area me-1"></i>
-                        Donasi Terbaru
+                        Program yang baru anda donasikan
                     </div>
                     <div class="card-body">
                         <table class="table stripped">
                             <tr>
-                                <td>Waktu</td>
-                                <td>Nama</td>
-                                <td>Jumlah</td>
-                                <td>Program</td>
+                                <th>Waktu</th>
+                                <th>Nama Program</th>
+                                <th>Jumlah</th>
                             </tr>
-                            {{-- @forelse ($donation as $dn)
+                            @forelse ($recent_donated as $dn)
                             <tr>
                                 <td>{{ date('d/m/Y H:i:s', strtotime($dn->created_at))}}</td>
                                 <td>{{$dn->nama}}</td>
@@ -100,20 +74,11 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="3">Empty</td>
+                                <td colspan="3" class="text-center">Empty</td>
                             </tr>
-                            @endforelse --}}
+                            @endforelse
                         </table>
                     </div>
-                </div>
-            </div>
-            <div class="col-xl-6">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-chart-bar me-1"></i>
-                        Bar Chart Example
-                    </div>
-                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
                 </div>
             </div>
         </div>

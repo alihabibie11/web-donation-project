@@ -13,8 +13,11 @@
                     <div class="sb-nav-link-icon"><i class="fa fa-th" aria-hidden="true"></i></div>
                     Riwayat Donasi
                 </a>
+                @php
+                $id = Auth::user()->id;
+                @endphp
                 <a class="nav-link {{ (Route::currentRouteName() == 'user.profile') ? 'active' : '' }}"
-                    href="{{ route('user.profile') }}">
+                    href="{{ route('user.profile', $id) }}">
                     <div class="sb-nav-link-icon"><i class="fa fa-user-circle" aria-hidden="true"></i></div>
                     Profile
                 </a>

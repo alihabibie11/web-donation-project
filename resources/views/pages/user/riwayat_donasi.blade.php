@@ -1,15 +1,15 @@
-@extends('layouts.admin')
+@extends('layouts.user')
 
-@section('title', 'Program')
+@section('title', 'Riwayat Donasi')
 
 @section('content')
 
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Program</h1>
+        <h1 class="mt-4">Riwayat Donasi</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item">Program</li>
-            <li class="breadcrumb-item active">Index</li>
+            <li class="breadcrumb-item">Dashboard</li>
+            <li class="breadcrumb-item active">Riwayat Donasi</li>
         </ol>
         @if(session()->has('message'))
         <div class="alert alert-success">
@@ -18,41 +18,40 @@
         @endif
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                Daftar Program
-                <div class="float-end"><a href="{{ route('admin.program.create') }}" class="btn btn-primary">+ Buat
-                        Program Baru</a>
-                    <a href="{{ route('admin.report', 'program') }}" class="btn btn-danger"><i
-                            class="fa-solid fa-file-pdf"></i> Export PDF</a>
-                </div>
+                <i class="fas fa-table me"></i>
+                Daftar Riwayat Donasi
+                <div class="float-end"><a href="{{ route('admin.program.create') }}" class="btn btn-primary"><i
+                            class="fa-solid fa-file-pdf"></i> Export
+                        PDF</a></div>
             </div>
             <div class="card-body">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Image</th>
-                            <th>Judul</th>
-                            <th>Ringkasan</th>
+                            <th>No</th>
+                            <th>Nama Program</th>
                             <th>Jenis</th>
-                            <th>Target</th>
-                            <th>Dana Terkumpul</th>
+                            <th>Jumlah Donasi</th>
+                            <th>Target Donasi</th>
+                            <th>Dana yang sudah terkumpul</th>
+                            <th>Waktu</th>
                             <th>Status</th>
-                            <th>Dibuat pada</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
-                    @forelse ($data as $item)
+                    @php
+                    $no = 1;
+                    @endphp
+                    @forelse ($donated as $item)
                     <tr>
-                        <td class="text-center"><img width="100" class="thumbnail"
-                                src="{{ Storage::url($item->photo_program) }}" alt="">
-                        </td>
-                        <td>{{$item->title}}</td>
-                        <td>{{$item->ringkasan}}</td>
-                        <td>{{$item->jenis}}</td>
-                        <td>Rp. {{ number_format($item->target) }}</td>
-                        <td>Rp. {{ $item->dana_terkumpul ? $item->dana_terkumpul : '-' }}</td>
+                        <td>{{$no++}}</td>
+                        <td>{{$item->program->title}}</td>
+                        <td>{{$item->program->jenis}}</td>
+                        <td>Rp. {{number_format($item->jumlah)}}</td>
+                        <td>Rp. {{ $item->program->target ? number_format($item->program->target) : '-' }}</td>
+                        <td>Rp. {{ $item->dana_terkumpul ? number_format($item->dana_terkumpul) : '-' }}</td>
+                        <td>{{ date('d/m/Y h:i:s', strtotime($item->created_at))}}</td>
                         <td>{{$item->status}}</td>
-                        <td>{{$item->created_at}}</td>
                         <td>
                             <form action="{{ route('admin.program.destroy', $item->id) }}" method="post"
                                 style="display: inline-block;">
@@ -67,7 +66,7 @@
                                     class="fa fa-info-circle" aria-hidden="true"></i></a>
                         </td>
                         @empty
-                        <td colspan="6" class="text-center">Empty</td>
+                        <td colspan="8" class="text-center">Empty</td>
                         @endforelse
                     </tr>
                 </table>
