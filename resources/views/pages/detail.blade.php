@@ -279,8 +279,9 @@
                         <ul class="list-group list-group-horizontal" style="justify-content: center; flex-wrap: wrap;">
                             @forelse ($donated as $dn)
                             <li class="list-group-item no_border" style="padding: 0.5rem 0.3rem;">
-                                <a href=""><img src="https://ui-avatars.com/api/?name={{$dn->nama}}&background=random"
-                                        alt="" class="rounded-circle" width="40"></a>
+                                <a><img data-bs-toggle="tooltip" data-bs-placement="top" title="{{$dn->nama}}"
+                                        src="https://ui-avatars.com/api/?name={{$dn->nama}}&background=random" alt=""
+                                        class="rounded-circle" width="40"></a>
                             </li>
                             @empty
                             <p class="text-center">Jadilah yang pertama untuk donasi.</p>

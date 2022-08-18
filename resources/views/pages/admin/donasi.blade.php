@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                         <tr>
                             <th>Kode Donasi</th>
@@ -29,7 +29,7 @@
                             <th>Keterangan / Do'a</th>
                             <th>Jumlah</th>
                             <th>Status</th>
-                            <th>Bank</th>
+                            <th>Via</th>
                             <th>Program</th>
                             <th>Tanggal</th>
                             <th>Aksi</th>
@@ -40,7 +40,7 @@
                         <td>{{ $item->kode_donasi }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->doa }}</td>
-                        <td>{{ $item->jumlah }}</td>
+                        <td>Rp. {{ number_format($item->jumlah) }}</td>
                         <td>{{ $item->status }}</td>
                         <td>{{ $item->bank }}</td>
                         <td>{{ $item->title }}</td>
@@ -68,5 +68,11 @@
         </div>
     </div>
 </main>
-
+@push('addon-script')
+<script>
+    $(document).ready( function () {
+    $('#table').DataTable();
+} );
+</script>
+@endpush
 @stop

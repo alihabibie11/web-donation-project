@@ -5,6 +5,11 @@
 @section('content')
 
 <style>
+    table .table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .form-control {
         margin: 0 auto;
         width: 25%;
@@ -54,7 +59,7 @@
 
 <div class="container">
     <div class="title-list text-center mb-4">
-        <h2 class="">Cek Donasi</h2>
+        <h2>Cek Donasi</h2>
         <p>Isi Kode Donasi dan Email anda untuk mengecek status donasi.</p>
         <div class="row">
             <div class="form-customize">
@@ -70,7 +75,7 @@
 
     <div class="container-xxl mx-auto p-0  position-relative header-2-2">
         <div class="row" style="justify-content: center;">
-            <div id="detail_donasi" class="text-center">
+            <div id="detail_donasi">
 
             </div>
         </div>

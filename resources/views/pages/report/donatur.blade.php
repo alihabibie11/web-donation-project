@@ -36,7 +36,7 @@
 <body>
     <h1 class="title">LAPORAN {{ strtoupper($title) }}</h1>
     <p class="date-title">Tanggal : {{ $date }}</p>
-    <table class="table1">
+    <table class="table1" id="table">
         <thead>
             <tr>
                 <th style="width: 5px;">No</th>

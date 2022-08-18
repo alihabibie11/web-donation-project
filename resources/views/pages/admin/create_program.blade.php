@@ -97,9 +97,17 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label class="form-label">Photo</label>
+                        <label class="form-label">Featured Photo</label>
                         <div class="input-group mb-3">
-                            <input type="file" name="photo_program" class="form-control" id="inputGroupFile02">
+                            <input type="file" name="photo[]" class="form-control" id="inputGroupFile02">
+                            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="file" name="photo[]" class="form-control" id="inputGroupFile02">
+                            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="file" name="photo[]" class="form-control" id="inputGroupFile02">
                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                         </div>
                     </div>

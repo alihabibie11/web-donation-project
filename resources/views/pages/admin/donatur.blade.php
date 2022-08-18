@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -63,5 +63,11 @@
         </div>
     </div>
 </main>
-
+@push('addon-script')
+<script>
+    $(document).ready( function () {
+    $('#table').DataTable();
+} );
+</script>
+@endpush
 @stop

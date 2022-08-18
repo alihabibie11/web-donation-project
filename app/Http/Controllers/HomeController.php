@@ -62,8 +62,31 @@ class HomeController extends Controller
 
     public function list_program()
     {
+        //search belum bisa karna ada type program all, harus disesuaikan lagi
         $user = auth()->check();
         $nav = true;
+        $program = Program::query();
+        if (isset($_GET['search_program']) && $_GET['search_program'] != '') {
+            $program = $program->where('title', 'like', '%' . $_GET['search_program'] . '%');
+            if (isset($_GET['category']) && $_GET['category'] != 'all') {
+                $category = $_GET['category'];
+                $program = $program->where('jenis', '=', $category);
+            }
+            // dd($program->get());
+            $program = $program;
+            return view('pages.list_program', compact('user', 'nav', 'program'));
+        }
+        $program = $program->get();
+        dd($program);
+        return view('pages.list_program', compact('user', 'nav', 'program'));
+    }
+
+    public function list_program2()
+    {
+        //search belum bisa karna ada type program all, harus disesuaikan lagi
+        $user = auth()->check();
+        $nav = true;
+        $program_all = Program::all();
         if (isset($_GET['search_program']) && $_GET['search_program'] != '') {
             $program = Program::where('status', '!=', 'SELESAI');
             $program_done = Program::where('status', '=', 'SELESAI');
@@ -76,13 +99,13 @@ class HomeController extends Controller
             }
             $program = $program->get();
             $program_done = $program_done->get();
-            return view('pages.list_program', compact('user', 'nav', 'program', 'program_done'));
+            return view('pages.list_program', compact('user', 'nav', 'program', 'program_done', 'program_all'));
         }
         $program = Program::where('status', '!=', 'SELESAI');
         $program_done = Program::where('status', '=', 'SELESAI');
         $program = $program->get();
         $program_done = $program_done->get();
-        return view('pages.list_program', compact('user', 'nav', 'program', 'program_done'));
+        return view('pages.list_program', compact('user', 'nav', 'program', 'program_done', 'program_all'));
     }
 
     /**
@@ -173,13 +196,14 @@ class HomeController extends Controller
         $kode_donasi = $_GET['id'] ?? '';
         $email = $_GET['email'] ?? '';
         // dd($kode_donasi, $email);
-        $donate = Donation::with('program')->where('kode_donasi', '=', $kode_donasi)->where('email', '=', $email)->first();
+        $donate = Donation::with('program')->where('kode_donasi', '=', $kode_donasi)->where('email', '=', $email)->orWhere('no_hp', $email)->first();
         // dd($donate);
         $html = '';
 
         if ($donate) {
             $html .=
-                '<table class="table">
+                '<table class="table" style="margin-left: auto;
+                margin-right: auto;">
             <tr>
                 <td>ID Donasi</td>
                 <td>:</td>

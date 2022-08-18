@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Galleries;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,12 +40,19 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        // dd($data['photo']);
         $data['user_id'] = Auth::user()->id;
 
-        if ($request->hasFile('photo_program')) {
+        $photo = [];
+        if ($request->hasFile('photo')) {
             // $fileName = $request->file('photo_program')->getClientOriginalName();
-            $data['photo_program'] = $request->file('photo_program')->store('assets/images/program', 'public');
+            $no = 0;
+            foreach ($data['photo'] as $item) {
+                $photo[$no++] = $item->store('assets/images/program', 'public');
+                // $data['photo'] = $request->file('photo_program')->store('assets/images/program', 'public');
+            }
         }
+        // dd($photo);
 
         $arr = [];
         $arr['facebook'] = $request->fb;
@@ -54,9 +62,18 @@ class ProgramController extends Controller
         $data['sosmed'] = json_encode($arr);
         // dd($data);
 
-        Program::create($data);
-        session()->flash('message', "Program berhasil dibuat!");
+        $program = Program::create($data);
 
+        foreach ($photo as $ph) {
+            $pic = new Galleries(
+                [
+                    'url' => $ph
+                ]
+            );
+            $program->gallery()->save($pic);
+        }
+
+        session()->flash('message', "Program berhasil dibuat!");
         return redirect()->route('admin.program.index');
     }
 
@@ -68,11 +85,12 @@ class ProgramController extends Controller
      */
     public function show($id)
     {
-        $item = Program::findOrFail($id);
+        $item = Program::with('gallery')->findOrFail($id);
+        $gallery = $item->gallery;
         $res = json_decode($item->sosmed);
         // dd($res);
-        // dd($item);
-        return view('pages.admin.detail_program', compact('item', 'res'));
+        // dd($item->gallery);
+        return view('pages.admin.detail_program', compact('item', 'res', 'gallery'));
     }
 
     /**

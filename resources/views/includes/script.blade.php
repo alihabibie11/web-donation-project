@@ -7,3 +7,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/js/splide-renderer.min.js"
     integrity="sha256-iVMvvpyyZR50QNbdLOokvWmCEeO+F/VwTR434kVH2+U=" crossorigin="anonymous"></script>
 <script src="{{ url('assets/js/splide_script.js') }}"></script>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+</script>

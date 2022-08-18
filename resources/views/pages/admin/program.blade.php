@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                         <tr>
                             <th>Image</th>
@@ -50,7 +50,7 @@
                         <td>{{$item->ringkasan}}</td>
                         <td>{{$item->jenis}}</td>
                         <td>Rp. {{ number_format($item->target) }}</td>
-                        <td>Rp. {{ $item->dana_terkumpul ? $item->dana_terkumpul : '-' }}</td>
+                        <td>Rp. {{ $item->dana_terkumpul ? number_format($item->dana_terkumpul) : '-' }}</td>
                         <td>{{$item->status}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>
@@ -75,5 +75,11 @@
         </div>
     </div>
 </main>
-
+@push('addon-script')
+<script>
+    $(document).ready( function () {
+    $('#table').DataTable();
+} );
+</script>
+@endpush
 @stop

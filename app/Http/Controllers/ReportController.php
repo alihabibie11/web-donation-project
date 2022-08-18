@@ -39,7 +39,7 @@ class ReportController extends Controller
             $donation = DB::table('donations')
                 ->leftjoin('programs', 'donations.program_id', '=', 'programs.id')
                 ->leftjoin('users', 'donations.user_id', '=', 'users.id')
-                ->where('programs.user_id', '=', Auth::id())
+                // ->where('programs.user_id', '=', Auth::id())
                 ->select('donations.*', 'programs.title', 'users.name')
                 ->get();
             // dd($donation);

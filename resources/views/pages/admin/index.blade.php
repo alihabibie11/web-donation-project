@@ -86,10 +86,10 @@
                     <div class="card-body">
                         <table class="table stripped">
                             <tr>
-                                <td>Waktu</td>
-                                <td>Nama</td>
-                                <td>Jumlah</td>
-                                <td>Program</td>
+                                <th>Waktu</th>
+                                <th>Nama</th>
+                                <th>Jumlah</th>
+                                <th>Program</th>
                             </tr>
                             @forelse ($donation as $dn)
                             <tr>

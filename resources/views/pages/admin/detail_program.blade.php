@@ -43,7 +43,8 @@
                 <div class="row">
                     <div class="col-lg-4 text-center">
                         <div class="h-100">
-                            <img class="img-fluid img-custom" src="{{ Storage::url($item->photo_program) }}" alt="">
+                            <img class="img-fluid img-custom"
+                                src="{{ $gallery ? Storage::url($gallery->first()->url) : '' }}" alt="">
                         </div>
                     </div>
                     <div class="col-lg-8">

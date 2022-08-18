@@ -25,4 +25,9 @@ class Program extends Model
     {
         return $this->belongsTo(Donation::class, 'program_id', 'id');
     }
+
+    public function gallery()
+    {
+        return $this->hasMany(Galleries::class);
+    }
 }

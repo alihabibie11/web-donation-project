@@ -42,14 +42,47 @@
     </div>
     <div class="row mt-2">
         <div class="col-lg-3">
-            <button id="ongoing_btn" class="btn btn-primary mb-3 btn_left" type="button">Masih Berjalan</button>
+            <button id="all_btn" class="btn btn-primary mb-3 btn_left" type="button">Semua Program</button>
+        </div>
+        <div class="col-lg-3">
+            <button id="ongoing_btn" class="btn btn-info mb-3 btn_left" type="button">Masih Berjalan</button>
         </div>
         <div class="col-lg-3">
             <button id="finished_btn" class="btn btn-success btn_right" type="button">Sudah Selesai</button>
         </div>
     </div>
+    <div id="all_donation" class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 g-4 mt-4">
+        @php
+        $program_all = $program->get();
+        @endphp
+        @forelse ($program_all as $all)
+        <a href="{{ route('detail', $all->id) }}" class="big_hv no_url_style">
+            <div class="card h-100">
+                <img src="{{ $all->photo_program ? Storage::url($all->photo_program) : url('assets/images/cat1.jpeg') }}"
+                    class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $all->title }}</h5>
+                    <p class="card-text">{{ $all->ringkasan }}</p>
+                </div>
+                <div class="category-field p-3">
+                    <span class="badge bg-{{$all->jenis == 'zakat' ? 'success' : 'primary'}}">{{ $all->jenis }}</span>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{ $all->created_at->diffForHumans() }}</small>
+                </div>
+            </div>
+        </a>
+        @empty
+        <div class="container">
+            <h3 class="text-center">Tidak ada Program donasi.</h3>
+        </div>
+        @endforelse
+    </div>
     <div id="ongoing_donation" class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 g-4 mt-4">
-        @forelse ($program as $prg)
+        @php
+        $program_on = $program->where('status', '!=', 'SELESAI')->get();
+        @endphp
+        @forelse ($program_on as $prg)
         <a href="{{ route('detail', $prg->id) }}" class="big_hv no_url_style">
             <div class="card h-100">
                 <img src="{{ $prg->photo_program ? Storage::url($prg->photo_program) : url('assets/images/cat1.jpeg') }}"
@@ -74,6 +107,9 @@
     </div>
     <div id="finished_donation" class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 g-4 mt-4"
         style="display: none;">
+        @php
+        $program_done = $program->where('status', '=', 'SELESAI')->get();
+        @endphp
         @forelse ($program_done as $prg)
         <a href="{{ route('detail', $prg->id) }}" class="big_hv no_url_style">
             <div class="card h-100">
@@ -102,17 +138,31 @@
 @stop
 @push('addon-script')
 <script>
+    $( document ).ready(function() {
+        $('#all_btn').attr('disabled', 'disabled')
+    });
+    $('#all_btn').click(function () {
+        $('#ongoing_donation').hide();
+        $('#finished_donation').hide();
+        $('#all_donation').toggle();
+        $('#all_btn').attr('disabled','disabled');
+        $('#ongoing_btn').removeAttr('disabled');
+    })
     $('#finished_btn').click(function () {
         $('#ongoing_donation').hide();
+        $('#all_donation').hide();
         $('#finished_donation').toggle();
-        $('#finished_btn').attr('disabled','disabled');
+        $('#finished_btn').attr('disabled','disabled');     
         $('#ongoing_btn').removeAttr('disabled');
+        $('#all_btn').removeAttr('disabled');
     })
     $('#ongoing_btn').click(function () {
         $('#finished_donation').hide();
+        $('#all_donation').hide();
         $('#ongoing_donation').show();
         $('#ongoing_btn').attr('disabled','disabled');
         $('#finished_btn').removeAttr('disabled');
+        $('#all_btn').removeAttr('disabled');
         })
 </script>
 @endpush
