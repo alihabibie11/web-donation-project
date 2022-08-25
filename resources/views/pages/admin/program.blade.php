@@ -38,6 +38,7 @@
                             <th>Dana Terkumpul</th>
                             <th>Status</th>
                             <th>Dibuat pada</th>
+                            <th>Viewed</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -53,6 +54,7 @@
                         <td>Rp. {{ $item->dana_terkumpul ? number_format($item->dana_terkumpul) : '-' }}</td>
                         <td>{{$item->status}}</td>
                         <td>{{$item->created_at}}</td>
+                        <td>{{$item->viewed}}</td>
                         <td>
                             <form action="{{ route('admin.program.destroy', $item->id) }}" method="post"
                                 style="display: inline-block;">

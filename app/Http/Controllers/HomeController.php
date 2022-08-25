@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Donation;
 use App\Models\Program;
 use Exception;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Midtrans\Config;
@@ -12,6 +13,10 @@ use Midtrans\Snap;
 
 class HomeController extends Controller
 {
+    public function boot()
+    {
+        Paginator::useBootstrapFive();
+    }
     /**
      * Create a new controller instance.
      *
@@ -41,8 +46,9 @@ class HomeController extends Controller
         $nav = false;
         $detail = 'Detail Program Donasi ' . $id;
         $program = Program::with('donatur')->find($id);
+        // $program->increment('viewed');
+        $program->save(['viewed' => $program->viewed++]);
         $donated = Donation::with('program', 'donatur')->where('program_id', '=', $id)->latest()->get();
-
         $total = $program->target;
         $value_now = $program->dana_terkumpul;
         $result = ($value_now / $total) * 100;
@@ -62,6 +68,7 @@ class HomeController extends Controller
 
     public function list_program()
     {
+        $test = Program::all();
         //search belum bisa karna ada type program all, harus disesuaikan lagi
         $user = auth()->check();
         $nav = true;
@@ -73,11 +80,10 @@ class HomeController extends Controller
                 $program = $program->where('jenis', '=', $category);
             }
             // dd($program->get());
-            $program = $program;
+            $program = $program->simplePaginate(10);
             return view('pages.list_program', compact('user', 'nav', 'program'));
         }
-        $program = $program->get();
-        dd($program);
+        $program = $program->simplePaginate(10);
         return view('pages.list_program', compact('user', 'nav', 'program'));
     }
 

@@ -6,8 +6,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="">
                         <div class="list-space">
-                            <img src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header2/Header-2-5.png"
-                                alt="" />
+                            <img src="{{ asset('assets/images/material/icon_logo.jpg') }}" width="60" alt="" />
                         </div>
                         <nav class="list-unstyled">
                             <li class="list-space">

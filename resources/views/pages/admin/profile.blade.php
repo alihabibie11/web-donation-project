@@ -41,6 +41,10 @@
                                 <i class="fas fa-pencil"></i>
                                 Edit
                             </a>
+                            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#edit-photo-modal">
+                                <i class="fa-solid fa-file-image"></i>
+                                Ubah Foto
+                            </button>
                 </div>
             </div>
             <div class="card-body">
@@ -104,6 +108,25 @@
                                 </td>
                             </tr>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="edit-photo-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" id="staticBackdropLabel">Donasi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <img class="img-fluid img-custom" src="{{ Storage::url($item->photo_url) }}" alt="">
+                                {{-- <img class="img-fluid img-custom" src="" alt=""> --}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

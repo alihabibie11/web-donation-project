@@ -61,45 +61,55 @@
 
     <div class="content-2-2 container-xxl mx-auto p-0  position-relative" style="font-family: 'Poppins', sans-serif">
         <div class="text-center title-text">
-            <h1 class="text-title">3 Keys Benefit</h1>
+            <h1 class="text-title">Beragam Kelebihan Sedekah</h1>
             <p class="text-caption" style="margin-left: 3rem; margin-right: 3rem">
-                You can easily manage your business with a powerful tools
+                Anda bisa menggunakan fitur-fitur yang memudahkan untuk sedekah di platform ini
             </p>
         </div>
 
         <div class="grid-padding text-center">
             <div class="row">
-                <div class="col-lg-4 column">
+                <div class="col-lg-6 column">
                     <div class="icon">
                         <img src="http://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content2/Content-2-5.png"
                             alt="" />
                     </div>
-                    <h3 class="icon-title">Easy to Operate</h3>
+                    <h3 class="icon-title">MUDAH</h3>
                     <p class="icon-caption">
-                        This can easily help you to<br />
-                        grow up your business fast
+                        Lebih mudah bersedekah langsung lewat gadget sendiri.
                     </p>
                 </div>
-                <div class="col-lg-4 column">
+                <div class="col-lg-6 column">
                     <div class="icon">
                         <img src="http://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content2/Content-2-6.png"
                             alt="" />
                     </div>
-                    <h3 class="icon-title">Real-Time Analytic</h3>
+                    <h3 class="icon-title">TRANSPARAN</h3>
                     <p class="icon-caption">
-                        With real-time analytics, you<br />
-                        can check data in real time
+                        Kita bisa mengetahui sedekahnya didonasikan ke mana dan dalam bentuk program apa.
                     </p>
                 </div>
-                <div class="col-lg-4 column">
+                <div class="col-lg-6 column">
                     <div class="icon">
                         <img src="http://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content2/Content-2-7.png"
                             alt="" />
                     </div>
-                    <h3 class="icon-title">Very Full Secured</h3>
+                    <h3 class="icon-title">DIDOAKAN</h3>
                     <p class="icon-caption">
-                        With real-time analytics, we<br />
-                        will guarantee your data
+                        Anda dapat melampirkan doa anda untuk kemudian didoakan oleh penerima donasi. Semoga dengan
+                        demikian, Allah memudahkan tercapainya doa kita, karena kita tidak tahu lisan siapa kita doa
+                        terkabulkan.
+                    </p>
+                </div>
+                <div class="col-lg-6 column">
+                    <div class="icon">
+                        <img src="http://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content2/Content-2-7.png"
+                            alt="" />
+                    </div>
+                    <h3 class="icon-title">PANTAU</h3>
+                    <p class="icon-caption">
+                        Kita bisa memantau progres jumlah sedekah kita tiap bulan dengan rinci sehingga sangat mendukung
+                        semangat bersedekah sebagai gaya hidup seorang muslim
                     </p>
                 </div>
             </div>
@@ -107,7 +117,9 @@
     </div>
 
 </section>
-<section class="h-100 w-100 bg-white" id="testimoni" style="box-sizing: border-box">
+
+{{-- testimoni --}}
+{{-- <section class="h-100 w-100 bg-white" id="testimoni" style="box-sizing: border-box">
 
     <div class="content-2-2 container-xxl mx-auto p-0  position-relative" style="font-family: 'Poppins', sans-serif">
         <div class="text-center title-text">
@@ -181,5 +193,5 @@
         </div>
     </div>
 
-</section>
+</section> --}}
 @stop

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->text('photo_program')->nullable();
             $table->text('location')->nullable();
             $table->text('url_location')->nullable();
+            $table->integer('viewed')->nullable();
             $table->timestamps();
         });
     }

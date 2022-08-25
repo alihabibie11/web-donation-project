@@ -120,9 +120,11 @@
             <div class="col-lg-8">
                 <div class="title text-center">
                     <h2 class="">{{ $program->title }}</h2>
-                    <p> <i class="fa fa-pencil-square-o"></i> Dibuat oleh : {{ $program->donatur->name }} | <i
-                            class="fa fa-clock-o "></i>
-                        {{$program->created_at->isoFormat('dddd, D MMMM Y')}} </p>
+                    <p> <i class="fa fa-pencil-square-o"></i> Dibuat oleh : {{ $program->donatur->name ?? 'Unknown' }} |
+                        <i class="fa fa-clock-o "></i>
+                        {{$program->created_at->isoFormat('dddd, D MMMM Y')}} | <i class="fa fa-eye"></i>
+                        Dilihat : {{ $program->viewed ?? 0 }}
+                    </p>
                 </div>
             </div>
         </div>
