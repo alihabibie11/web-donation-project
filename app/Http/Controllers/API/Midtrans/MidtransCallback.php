@@ -6,6 +6,7 @@ use Midtrans\Config;
 use Midtrans\Notification;
 use App\Http\Controllers\Controller;
 use App\Models\Donation;
+use App\Models\Program;
 use App\Models\Transaction;
 
 class MidtransCallback extends Controller
@@ -31,7 +32,7 @@ class MidtransCallback extends Controller
         $order = explode('-', $order_id); //['KD','ID','PROGRAM_ID', 'RANDOM+DATE']
 
         // Cari transaksi berdasarkan ID
-        $transaction = Donation::findOrFail($order[1]);
+        $transaction = Donation::with('program')->findOrFail($order[1]);
 
         // Handle notification status midtrans
         if ($status == 'capture') {
@@ -40,10 +41,14 @@ class MidtransCallback extends Controller
                     $transaction->status = 'PENDING';
                 } else {
                     $transaction->status = 'SUCCESS';
+                    $counted_dana = ['dana_terkumpul' => $transaction->jumlah + $transaction->program->dana_terkumpul];
+                    $transaction->program()->update($counted_dana);
                 }
             }
         } else if ($status == 'settlement') {
             $transaction->status = 'SUCCESS';
+            $counted_dana = ['dana_terkumpul' => $transaction->jumlah + $transaction->program->dana_terkumpul];
+            $transaction->program()->update($counted_dana);
         } else if ($status == 'pending') {
             $transaction->status = 'PENDING';
         } else if ($status == 'deny') {
@@ -55,6 +60,9 @@ class MidtransCallback extends Controller
         }
 
         // Simpan transaksi
+        // $add_dana = new Program([
+        //     'dana_terkumpul' => $transaction->program->dana_terkumpul + $transaction->jumlah
+        // ]);
         $transaction->save();
 
         // Return response

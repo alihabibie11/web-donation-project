@@ -153,9 +153,13 @@ class HomeController extends Controller
         ];
         // dd($ddata);
 
-        $donate = Donation::create($ddata);
-
-        session()->flash('message', "Donasi berhasil dibuat!");
+        // $donate = Donation::create($ddata);
+        // $transaction = Donation::with('program')->find($donate->id);
+        // // dd($transaction->program->dana_terkumpul);
+        // $counted_dana = ['dana_terkumpul' => (int)$transaction->jumlah + (int)$transaction->program->dana_terkumpul];
+        // $transaction->program()->update($counted_dana);
+        // dd($counted_dana);
+        // session()->flash('message', "Donasi berhasil dibuat!");
 
         // midtrans call back (notif) tidak berjalan di local
         // Konfigurasi midtrans
