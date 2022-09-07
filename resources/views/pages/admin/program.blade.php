@@ -37,6 +37,7 @@
                             <th>Target</th>
                             <th>Dana Terkumpul</th>
                             <th>Status</th>
+                            <th>Publish Status</th>
                             <th>Dibuat pada</th>
                             <th>Viewed</th>
                             <th>Aksi</th>
@@ -53,6 +54,7 @@
                         <td>Rp. {{ number_format($item->target) }}</td>
                         <td>Rp. {{ $item->dana_terkumpul ? number_format($item->dana_terkumpul) : '-' }}</td>
                         <td>{{$item->status}}</td>
+                        <td>{{$item->publish_status}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->viewed}}</td>
                         <td>

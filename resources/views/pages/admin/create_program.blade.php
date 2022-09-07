@@ -34,15 +34,26 @@
                                 <input type="text" name="title" class="form-control" required>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-3">
                             <div class="mb-3">
                                 <label class="form-label">Jenis Program</label>
                                 <select name="jenis" class="form-select">
-                                    <option selected>Open this select menu</option>
+                                    <option value="">--Pilih--</option>
                                     <option value="zakat">Zakat</option>
                                     <option value="infaq">Infaq</option>
                                     <option value="sedekah">Sedekah</option>
                                     <option value="umum">Umum</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select name="publish_status" class="form-select">
+                                    <option value="">--Pilih--</option>
+                                    <option value="active">Active</option>
+                                    <option value="draft">Draft</option>
+                                    <option value="inactive">Inactive</option>
                                 </select>
                             </div>
                         </div>

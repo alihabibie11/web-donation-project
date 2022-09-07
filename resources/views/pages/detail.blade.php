@@ -58,13 +58,13 @@
     }
 
     .tick {
-        background-color: #4CAF50;
+        background-color: #19875487;
         color: white;
         font-size: 16px;
-        padding: 6px 12px;
-        height: 40px;
-        width: 40px;
-        border-radius: 100%;
+        /* padding: 6px 12px; */
+        height: 26px;
+        width: 26px;
+        border-radius: 100%
     }
 
     .img-custom {
@@ -320,7 +320,9 @@
                                             <input class="form-check-input" type="checkbox" id="flexCheckDefault"
                                                 name="hamba_allah">
                                             <label class="form-check-label" for="flexCheckDefault">
-                                                Hamba Allah
+                                                Hamba Allah <i class="fa fa-question-circle" data-bs-toggle="tooltip"
+                                                    title="Ceklis ini jika ingin menyembunyikan nama/identitas."
+                                                    aria-hidden="true"></i>
                                             </label>
                                         </div>
                                     </div>
@@ -384,64 +386,79 @@
                         <div class="card p-3 mt-3">
                             <h5>Detail Donasi</h5>
                             <div class="row">
-                                <div class="mb-3">
-                                    <label for="jml_donasi" class="form-label">Jumlah Donasi</label>
+                                <label for="jml_donasi" class="form-label">Jumlah Donasi</label>
+                                <div class='col text-center p-3'>
+                                    <input type="radio" name="imgbackground" id="img1" class="d-none imgbgchk"
+                                        value="10000">
+                                    <label for="img1">
+                                        {{-- <img src="https://dummyimage.com/600x400/000/fff" alt="Image 1"> --}}
+                                        <span style="font-size: 24px">10.000</span>
+                                        <div class="tick_container">
+                                            <div class="tick"><i class="fa fa-check"></i></div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class='col text-center p-3'>
+                                    <input type="radio" name="imgbackground" id="img2" class="d-none imgbgchk"
+                                        value="50000">
+                                    <label for="img2">
+                                        {{-- <img src="https://dummyimage.com/600x400/000/fff" alt="Image 2"> --}}
+                                        <span style="font-size: 24px">50.000</span>
+                                        <div class="tick_container">
+                                            <div class="tick"><i class="fa fa-check"></i></div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class='col text-center p-3'>
+                                    <input type="radio" name="imgbackground" id="img3" class="d-none imgbgchk"
+                                        value="75000">
+                                    <label for="img3">
+                                        {{-- <img src="https://dummyimage.com/600x400/000/fff" alt="Image 3"> --}}
+                                        <span style="font-size: 24px">75.000</span>
+                                        <div class="tick_container">
+                                            <div class="tick"><i class="fa fa-check"></i></div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class='col text-center p-3'>
+                                    <input type="radio" name="imgbackground" id="img4" class="d-none imgbgchk"
+                                        value="100000">
+                                    <label for="img4">
+                                        {{-- <img src="https://dummyimage.com/600x400/000/fff" alt="Image 4"> --}}
+                                        <span style="font-size: 24px">100.000</span>
+                                        <div class="tick_container">
+                                            <div class="tick"><i class="fa fa-check"></i></div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-text" id="btnGroupAddon">RP</div>
                                     <input type="number" name="jumlah" class="form-control" id="jml_donasi" min="10000"
                                         required oninvalid="this.setCustomValidity('Minimal donasi sebesar 10.000')"
                                         oninput="this.setCustomValidity('')">
                                 </div>
-                                <div>
-                                    <a href="#">
-                                        <p class="float-end"><span class="fa fa-info-circle"></span> <small>Cara
-                                                melakukan
-                                                donasi</small></p>
-                                    </a>
-                                </div>
-                                {{-- <div class="container parent">
-                                    <div class="row">
-                                        <label class="form-label">Metode Pembayaran</label>
-                                        <div class='col text-center'>
-                                            <input type="radio" name="imgbackground" id="img1" class="d-none imgbgchk"
-                                                value="">
-                                            <label for="img1">
-                                                <img src="https://dummyimage.com/600x400/000/fff" alt="Image 1">
-                                                <div class="tick_container">
-                                                    <div class="tick"><i class="fa fa-check"></i></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class='col text-center'>
-                                            <input type="radio" name="imgbackground" id="img2" class="d-none imgbgchk"
-                                                value="">
-                                            <label for="img2">
-                                                <img src="https://dummyimage.com/600x400/000/fff" alt="Image 2">
-                                                <div class="tick_container">
-                                                    <div class="tick"><i class="fa fa-check"></i></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class='col text-center'>
-                                            <input type="radio" name="imgbackground" id="img3" class="d-none imgbgchk"
-                                                value="">
-                                            <label for="img3">
-                                                <img src="https://dummyimage.com/600x400/000/fff" alt="Image 3">
-                                                <div class="tick_container">
-                                                    <div class="tick"><i class="fa fa-check"></i></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class='col text-center'>
-                                            <input type="radio" name="imgbackground" id="img4" class="d-none imgbgchk"
-                                                value="">
-                                            <label for="img4">
-                                                <img src="https://dummyimage.com/600x400/000/fff" alt="Image 4">
-                                                <div class="tick_container">
-                                                    <div class="tick"><i class="fa fa-check"></i></div>
-                                                </div>
-                                            </label>
+                                <div class="accordion mb-3" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h3 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                <i class="fa fa-question-circle" style="margin-right: 4px"
+                                                    aria-hidden="true"></i>
+                                                Cara Melakukan Donasi
+                                            </button>
+                                        </h3>
+                                        <div id="collapseOne" class="accordion-collapse collapse"
+                                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id rerum
+                                                explicabo sit illo voluptatum earum maiores ab maxime sequi deserunt.
+                                            </div>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3">
@@ -462,6 +479,12 @@
 
     @push('addon-script')
     <script>
+        $("input[type='radio']").change(function(){
+                                            var v = $(this).val()
+                                            var inputNominal = $('#jml_donasi')
+                                            console.log('value : ' + v + '. element : ' + inputNominal)
+                                            inputNominal.val(v)
+                                    });
         // User-defined function to share some message on WhatsApp 
 	// function share() { 
 	//     // collet the user input 

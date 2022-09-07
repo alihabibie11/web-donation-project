@@ -37,7 +37,7 @@
                                     required>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-3">
                             <div class="mb-3">
                                 <label class="form-label">Jenis Program</label>
                                 <select name="jenis" class="form-select">
@@ -45,6 +45,20 @@
                                     @foreach ($jenis as $j)
                                     <option value="{{$j}}" @selected($j==$item->jenis)>{{$j}}</option>
                                     @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select name="publish_status" class="form-select">
+                                    <option value="">--Pilih--</option>
+                                    <option value="active" {{$item->publish_status == 'active' ? 'selected' :
+                                        ''}}>Active</option>
+                                    <option value="draft" {{$item->publish_status == 'draft' ? 'selected' : ''}}>Draft
+                                    </option>
+                                    <option value="inactive" {{$item->publish_status == 'inactive' ? 'selected' :
+                                        ''}}>Inactive</option>
                                 </select>
                             </div>
                         </div>

@@ -48,7 +48,8 @@ class HomeController extends Controller
         $program = Program::with('donatur')->find($id);
         // $program->increment('viewed');
         $program->save(['viewed' => $program->viewed++]);
-        $donated = Donation::with('program', 'donatur')->where('program_id', '=', $id)->latest()->get();
+        $donated = Donation::with('program', 'donatur')->where('program_id', '=', $id)->groupBy('user_id')->latest()->get();
+        // dd($donated);
         $total = $program->target;
         $value_now = $program->dana_terkumpul;
         $result = ($value_now / $total) * 100;
@@ -68,11 +69,10 @@ class HomeController extends Controller
 
     public function list_program()
     {
-        $test = Program::all();
         //search belum bisa karna ada type program all, harus disesuaikan lagi
         $user = auth()->check();
         $nav = true;
-        $program = Program::query();
+        $program = Program::query()->where('publish_status', '=', 'active');
         if (isset($_GET['search_program']) && $_GET['search_program'] != '') {
             $program = $program->where('title', 'like', '%' . $_GET['search_program'] . '%');
             if (isset($_GET['category']) && $_GET['category'] != 'all') {
@@ -153,7 +153,7 @@ class HomeController extends Controller
         ];
         // dd($ddata);
 
-        // $donate = Donation::create($ddata);
+        $donate = Donation::create($ddata);
         // $transaction = Donation::with('program')->find($donate->id);
         // // dd($transaction->program->dana_terkumpul);
         // $counted_dana = ['dana_terkumpul' => (int)$transaction->jumlah + (int)$transaction->program->dana_terkumpul];

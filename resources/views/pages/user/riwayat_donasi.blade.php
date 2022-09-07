@@ -25,7 +25,7 @@
                         PDF</a></div>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -49,7 +49,8 @@
                         <td>{{$item->program->jenis}}</td>
                         <td>Rp. {{number_format($item->jumlah)}}</td>
                         <td>Rp. {{ $item->program->target ? number_format($item->program->target) : '-' }}</td>
-                        <td>Rp. {{ $item->dana_terkumpul ? number_format($item->dana_terkumpul) : '-' }}</td>
+                        <td>Rp. {{ $item->program->dana_terkumpul ? number_format($item->program->dana_terkumpul) : '-'
+                            }}</td>
                         <td>{{ date('d/m/Y h:i:s', strtotime($item->created_at))}}</td>
                         <td>{{$item->status}}</td>
                         <td>
@@ -62,7 +63,7 @@
                             </form>
                             <a href="{{ route('admin.program.edit', $item->id) }}" class="btn btn-sm btn-warning"><i
                                     class="fa fa-pencil" aria-hidden="true"></i></a>
-                            <a href="{{ route('admin.program.show', $item->id) }}" class="btn btn-sm btn-success"><i
+                            <a href="{{ route('detail', $item->program->id) }}" class="btn btn-sm btn-success"><i
                                     class="fa fa-info-circle" aria-hidden="true"></i></a>
                         </td>
                         @empty
@@ -75,4 +76,11 @@
     </div>
 </main>
 
+@push('addon-script')
+<script>
+    $(document).ready( function () {
+    $('#table').DataTable();
+} );
+</script>
+@endpush
 @stop
