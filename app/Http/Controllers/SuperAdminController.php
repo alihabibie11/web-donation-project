@@ -7,7 +7,7 @@ use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminController extends Controller
+class SuperAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +16,15 @@ class AdminController extends Controller
      */
     public function index()
     {
+        // total program count
+        // total pencari dana count
+        // total user/donatur count
+        // latest donasi week/month maybe filter?
+
+        // manage page list account pencari dana / donatur
+
+        // withdraw? saat ini kan yg hanndle withdraw itu user sendiri (pencari dana)
+
         $program = Program::where('user_id', '=', Auth::id());
         $dana_terkumpul = $program->sum('dana_terkumpul');
         $total = $program->count();

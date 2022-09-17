@@ -281,7 +281,8 @@
                         <ul class="list-group list-group-horizontal" style="justify-content: center; flex-wrap: wrap;">
                             @forelse ($donated as $dn)
                             <li class="list-group-item no_border" style="padding: 0.5rem 0.3rem;">
-                                <a><img data-bs-toggle="tooltip" data-bs-placement="top" title="{{$dn->nama}}"
+                                <a><img data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="{{$dn->hamba_allah == 1 ? 'Hamba Allah' : $dn->nama}}"
                                         src="https://ui-avatars.com/api/?name={{$dn->nama}}&background=random" alt=""
                                         class="rounded-circle" width="40"></a>
                             </li>
@@ -305,7 +306,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('add_donation') }}" method="POST">
+                    <form target="_blank" action="{{ route('add_donation') }}" method="POST">
                         @csrf
                         <input type="hidden" name="program_id" value="{{ $program->id }}">
                         @if ($user === false)
@@ -367,7 +368,7 @@
                                     <tr>
                                         <td>No. HP/WA</td>
                                         <td>:</td>
-                                        <td>{{ auth()->user()->no_hp }}</td>
+                                        <td>{{ auth()->user()->no_hp ?? '-' }}</td>
                                     </tr>
                                     <tr>
                                         <td>Email</td>
@@ -377,9 +378,18 @@
                                     <tr>
                                         <td>Alamat</td>
                                         <td>:</td>
-                                        <td>{{ auth()->user()->alamat }}</td>
+                                        <td>{{ auth()->user()->alamat ?? '-' }}</td>
                                     </tr>
                             </table>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault"
+                                    name="hamba_allah">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Hamba Allah <i class="fa fa-question-circle" data-bs-toggle="tooltip"
+                                        title="Ceklis ini jika ingin menyembunyikan nama/identitas."
+                                        aria-hidden="true"></i>
+                                </label>
+                            </div>
                         </div>
                         @endif
 
@@ -467,7 +477,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3" style="width: 100%"><b>Donasi</b></button>
+                        <button type="submit" id="submitClick" class="btn btn-primary mt-3"
+                            style="width: 100%"><b>Donasi</b></button>
                     </form>
                 </div>
             </div>
@@ -479,6 +490,12 @@
 
     @push('addon-script')
     <script>
+        $('#submitClick').click(function() {
+            $(this).prop('disabled', true);
+            setTimeout(() => {
+                $(this).prop('disabled', false);
+            }, 3000);
+        })
         $("input[type='radio']").change(function(){
                                             var v = $(this).val()
                                             var inputNominal = $('#jml_donasi')

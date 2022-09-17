@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Donation;
 use App\Models\Program;
+use App\Models\User;
+use App\Notifications\NewUserNotification;
 use Exception;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Midtrans\Config;
 use Midtrans\Snap;
 
@@ -40,6 +43,21 @@ class HomeController extends Controller
         return view('pages.home', compact('header', 'nav', 'program'));
     }
 
+    public function test_notif()
+    {
+        $id = User::find(1);
+        foreach ($id->notifications as $notification) {
+            print_r($notification->data);
+        }
+        die;
+        $test = [
+            'name' => 'test'
+        ];
+
+        Notification::send($id, new NewUserNotification($test));
+        dd('ok');
+    }
+
     public function detail($id)
     {
         $user = auth()->check();
@@ -48,7 +66,7 @@ class HomeController extends Controller
         $program = Program::with('donatur')->find($id);
         // $program->increment('viewed');
         $program->save(['viewed' => $program->viewed++]);
-        $donated = Donation::with('program', 'donatur')->where('program_id', '=', $id)->groupBy('user_id')->latest()->get();
+        $donated = Donation::with('program', 'donatur')->where('program_id', '=', $id)->latest()->get();
         // dd($donated);
         $total = $program->target;
         $value_now = $program->dana_terkumpul;

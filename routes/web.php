@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/test-notif', [HomeController::class, 'test_notif'])->name('test_notif');
 Route::resource('/program', ProgramController::class);
 Route::get('/detail/{id?}', [HomeController::class, 'detail'])->name('detail');
 Route::get('/detail_donasi/{id}', [HomeController::class, 'detail_donasi'])->name('detail_donasi');
@@ -39,6 +41,15 @@ Auth::routes();
 Route::post('/register_admin', [RegisterController::class, 'create_admin'])->name('register.admin');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// chart
+Route::name('chart.')->middleware(['auth', 'admin'])->group(function () {
+    Route::prefix('chart')->group(function () {
+        Route::get('/admin', [AdminController::class, 'chart'])->name('admin');
+        //report
+        // Route::get('/report/{type}', [ReportController::class, 'report'])->name('report');
+    });
+});
 
 // admin middleware belum di set
 Route::name('admin.')->middleware(['auth', 'admin'])->group(function () {
@@ -64,5 +75,14 @@ Route::name('user.')->group(function () {
         Route::resource('/', UserController::class);
         Route::get('/riwayat_donasi', [UserController::class, 'donation_history'])->name('riwayat_donasi');
         Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
+    });
+});
+
+// superadmin dashboard
+Route::name('sa.')->group(function () {
+    Route::prefix('super-admin')->group(function () {
+        // Route::resource('/', UserController::class);
+        Route::get('/', [SuperAdminController::class, 'index'])->name('index');
+        // Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
     });
 });

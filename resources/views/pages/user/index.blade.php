@@ -41,7 +41,19 @@
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-header">
-                        Jumlah Program
+                        Sedekah Bulan Ini
+                    </div>
+                    <div class="card-body">
+                        <div class="text-card float-end">
+                            <div class="text-count">{{ '-' }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-info text-white mb-4">
+                    <div class="card-header">
+                        Sedekah Terakhir
                     </div>
                     <div class="card-body">
                         <div class="text-card float-end">
@@ -68,9 +80,8 @@
                             @forelse ($recent_donated as $dn)
                             <tr>
                                 <td>{{ date('d/m/Y H:i:s', strtotime($dn->created_at))}}</td>
-                                <td>{{$dn->nama}}</td>
-                                <td>Rp {{number_format($dn->jumlah)}}</td>
                                 <td>{{$dn->program->title}}</td>
+                                <td>Rp {{number_format($dn->jumlah)}}</td>
                             </tr>
                             @empty
                             <tr>

@@ -54,16 +54,7 @@
                         <td>{{ date('d/m/Y h:i:s', strtotime($item->created_at))}}</td>
                         <td>{{$item->status}}</td>
                         <td>
-                            <form action="{{ route('admin.program.destroy', $item->id) }}" method="post"
-                                style="display: inline-block;">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"
-                                        aria-hidden="true"></i></button>
-                            </form>
-                            <a href="{{ route('admin.program.edit', $item->id) }}" class="btn btn-sm btn-warning"><i
-                                    class="fa fa-pencil" aria-hidden="true"></i></a>
-                            <a href="{{ route('detail', $item->program->id) }}" class="btn btn-sm btn-success"><i
+                            <a href="{{ route('detail_donasi', $item->id) }}" class="btn btn-sm btn-success"><i
                                     class="fa fa-info-circle" aria-hidden="true"></i></a>
                         </td>
                         @empty
